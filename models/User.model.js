@@ -46,3 +46,11 @@ UserSchema.virtual('confirmPassword')
   .get(function () {
     return this._confirmPassword
   });
+
+  // Validate that passwords match
+  UserSchema.pre('validate', function (next) {
+    if (this.password !== this._confirmPassword) {
+      this.invalidate('confirmPassword', 'Passwords must match')
+    }
+    next();
+  });
