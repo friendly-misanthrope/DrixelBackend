@@ -41,16 +41,26 @@ const UserSchema = new Schema({
 // Set virtual confirmPassword field to value in req body
 UserSchema.virtual('confirmPassword')
   .set(function (confPass) {
-    this._confirmPassword = confPass
+    this._confirmPassword = confPass;
   })
   .get(function () {
-    return this._confirmPassword
+    return this._confirmPassword;
   });
 
   // Validate that passwords match
   UserSchema.pre('validate', function (next) {
     if (this.password !== this._confirmPassword) {
-      this.invalidate('confirmPassword', 'Passwords must match')
+      this.invalidate('confirmPassword', 'Passwords must match');
     }
     next();
   });
+
+  // Hash and salt password prior to saving new User in DB
+  UserSchema.pre('save', async function (next) {
+    if (this.isModified('password')) {
+      this.password = await bcrypt.hash(this.password, 16);
+    }
+    next();
+  });
+
+  module.exports = mongoose.model('User', UserSchema);
