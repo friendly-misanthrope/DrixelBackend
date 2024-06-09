@@ -37,3 +37,12 @@ const UserSchema = new Schema({
   timestamps: true
 });
 
+//* Mongoose Middleware
+// Set virtual confirmPassword field to value in req body
+UserSchema.virtual('confirmPassword')
+  .set(function (confPass) {
+    this._confirmPassword = confPass
+  })
+  .get(function () {
+    return this._confirmPassword
+  });
