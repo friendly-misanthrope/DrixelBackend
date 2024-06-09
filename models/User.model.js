@@ -26,6 +26,10 @@ const UserSchema = new Schema({
   albums: [{
     type: Schema.Types.ObjectId,
     ref: "Album"
+  }],
+  favoritePhotos: [{
+    type: Schema.Types.ObjectId,
+    ref: "Photo"
   }]
 })
 
