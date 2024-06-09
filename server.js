@@ -15,3 +15,8 @@ require('./config/mongoose.config');
 app.use(cookieParser());
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({extended: true}));
+
+// Listen for incoming requests on specified port
+app.listen(PORT, () => {
+  console.log(`Express server running on port ${PORT}`);
+})
