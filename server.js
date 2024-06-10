@@ -16,6 +16,10 @@ app.use(cookieParser());
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({extended: true}));
 
+/* ROUTES */
+// Register
+app.use('/register', require('./routes/auth/register'));
+
 // Listen for incoming requests on specified port
 app.listen(PORT, () => {
   console.log(`Express server running on port ${PORT}`);
