@@ -26,5 +26,32 @@ const registerUser = async (req, res) => {
       error: e
     });
   }
-
+  // Destructure user fields from request body
+  const {
+    username,
+    email,
+    password,
+    confirmPassword
+  } = req.body;
+  // Create new user from req.body
+  try {
+    const newUser = await Users.create({
+      username,
+      email,
+      password,
+      confirmPassword
+    });
+    // Send status code 201 & new user document in response 
+    res.status(201).json({
+      message: `User ${newUser.username} registered successfully.`,
+      newUser
+    });
+  } catch (e) {
+    res.status(500).json({
+      message: "Unable to create new user",
+      error: e
+    });
+  }
 }
+
+module.exports = { registerUser }
