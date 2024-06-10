@@ -9,7 +9,7 @@ const registerUser = async (req, res) => {
         { email: req.body.email },
         { username: req.body.username }
       ]
-    });
+    }).exec();
     // If email or username exist, return 409 conflict
     if (potentialUser.email) {
       return res.status(409).json({
@@ -40,7 +40,7 @@ const registerUser = async (req, res) => {
       email,
       password,
       confirmPassword
-    });
+    }).exec();
     // Send status code 201 & new user document in response 
     res.status(201).json({
       message: `User ${newUser.username} registered successfully.`,
