@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 /* ROUTES */
 // Register
-app.use('/register', require('./routes/auth/register'));
+app.use('/register', require('./routes/auth/register.route'));
 
 // Listen for incoming requests on specified port
 app.listen(PORT, () => {
