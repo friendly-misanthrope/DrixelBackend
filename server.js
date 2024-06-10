@@ -16,6 +16,9 @@ app.use(cookieParser());
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({extended: true}));
 
+/* EXPRESS MIDDLEWARE */
+app.use(express.json());
+
 /* ROUTES */
 // Register
 app.use('/register', require('./routes/auth/register.route'));
