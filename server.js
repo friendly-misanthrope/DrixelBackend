@@ -13,11 +13,20 @@ require('./config/mongoose.config');
 
 /* THIRD-PARTY MIDDLEWARE */
 app.use(cookieParser());
+// CORS policy
 app.use(cors(corsOptions));
+// body-parser
 app.use(bodyParser.urlencoded({extended: true}));
 
-/* EXPRESS MIDDLEWARE */
+
+/* BUILT-IN EXPRESS MIDDLEWARE */
+// Allows form data to be handled via URL
+app.use(express.urlencoded({ extended: false }));
+// Allows handling of JSON data
 app.use(express.json());
+// Allow serving of static files to:
+// root dir
+app.use(express.static(path.join(__dirname, '/public')));
 
 /* ROUTES */
 // Register
