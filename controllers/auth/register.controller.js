@@ -21,13 +21,13 @@ const registerUser = async (req, res) => {
         confirmPassword
       } = req.body;
 
-      newUser = await Users.create({
+      const { _id, albums, favoritePhotos } = await Users.create({
         username,
         email,
         password,
         confirmPassword
       });
-      return res.status(201).json(newUser)
+      return res.status(201).json({ newUser: { _id, email, albums, favoritePhotos }});
     }
   } catch (err) {
     console.log(err)
